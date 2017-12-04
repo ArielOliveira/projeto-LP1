@@ -1,6 +1,9 @@
 #ifndef FUNCIONARIO_H
 #define FUNCIONARIO_H
 
+#include <string>
+using std::string;
+
 namespace petfera {
 	class Funcionario {
 		protected:
