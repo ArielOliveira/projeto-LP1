@@ -15,11 +15,11 @@ ARCHIVE = ar
 
 LIB = -c
 
-OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o
+OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/anfibio.o ./build/mamifero.o
 
 petferaLib: $(LIB_DIR)/petfera.so $(LIB_DIR)/petfera.a
 
-#BIBLIOTECA LINUX #####################################################
+################### BIBLIOTECA LINUX ######################
 
 $(LIB_DIR)/petfera.a: LIB = -c
 $(LIB_DIR)/petfera.a: $(OBJS)
@@ -29,10 +29,14 @@ $(LIB_DIR)/petfera.so: LIB = -fPIC -c
 $(LIB_DIR)/petfera.so: $(OBJS)
 	$(CC) -shared -fPIC -o $@ $(OBJS)
 
-#######################################################################
+###########################################################
 
-#BIBLIOTECA WINDOWS
-###########################################
+################## BIBLIOTECA WINDOWS #####################
+
+
+
+
+###########################################################
 
 #OBJETOS
 $(OBJ_DIR)/funcionario.o: $(SRC_DIR)/funcionario.cpp $(INC_DIR)/funcionario.h
@@ -45,6 +49,12 @@ $(OBJ_DIR)/veterinario.o: $(SRC_DIR)/veterinario.cpp $(INC_DIR)/veterinario.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
 $(OBJ_DIR)/animal.o: $(SRC_DIR)/animal.cpp $(INC_DIR)/animal.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/anfibio.o: $(SRC_DIR)/anfibio.cpp $(INC_DIR)/anfibio.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/mamifero.o: $(SRC_DIR)/mamifero.cpp $(INC_DIR)/mamifero.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
 
