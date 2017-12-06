@@ -15,7 +15,7 @@ ARCHIVE = ar
 
 LIB = -c
 
-OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/anfibio.o ./build/mamifero.o
+OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/anfibio.o ./build/ave.o ./build/mamifero.o ./build/reptil.o ./build/nativo.o ./build/exotico.o
 
 petferaLib: $(LIB_DIR)/petfera.so $(LIB_DIR)/petfera.a
 
@@ -51,10 +51,22 @@ $(OBJ_DIR)/veterinario.o: $(SRC_DIR)/veterinario.cpp $(INC_DIR)/veterinario.h
 $(OBJ_DIR)/animal.o: $(SRC_DIR)/animal.cpp $(INC_DIR)/animal.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
+$(OBJ_DIR)/ave.o: $(SRC_DIR)/ave.cpp $(INC_DIR)/ave.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
 $(OBJ_DIR)/anfibio.o: $(SRC_DIR)/anfibio.cpp $(INC_DIR)/anfibio.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
 $(OBJ_DIR)/mamifero.o: $(SRC_DIR)/mamifero.cpp $(INC_DIR)/mamifero.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/reptil.o: $(SRC_DIR)/reptil.cpp $(INC_DIR)/reptil.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/nativo.o: $(SRC_DIR)/nativo.cpp $(INC_DIR)/nativo.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/exotico.o: $(SRC_DIR)/exotico.cpp $(INC_DIR)/exotico.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
 
