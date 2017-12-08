@@ -16,13 +16,13 @@ using std::vector;
 
 using namespace petfera;
 
-Funcionario* carregarDadosFuncionario(ifstream &arquivo, int funcionarios) {
+vector<Funcionario*>* carregarDadosFuncionario(ifstream &arquivo, int funcionarios) {
 	int id;
-	string nome, cpf, especialidade;
-	short idade, tipo_sanguineo;
+	string nome, cpf, especialidade, tipo_sanguineo;
+	short idade;
 	char fatorRH;
 
-	Funcionario *f;
+	vector<Funcionario*> *f = new vector<Funcionario*>(funcionarios);
 
 	for (int i = 0; i < funcionarios; i++) {
 		arquivo >> id;
@@ -35,15 +35,14 @@ Funcionario* carregarDadosFuncionario(ifstream &arquivo, int funcionarios) {
 		arquivo >> idade;
 		arquivo.ignore();
 
-		arquivo >> tipo_sanguineo;
-		arquivo.ignore();
+		getline(arquivo, tipo_sanguineo, ';');
 
 		arquivo >> fatorRH;
 		arquivo.ignore();
 
-		getline(arquivo, especialidade, ';');
-
-		f = new Funcionario(id, nome, cpf, idade, tipo_sanguineo, fatorRH, especialidade);
+		getline(arquivo, especialidade, '\n');
+		
+		f->insert(f->begin(), new Funcionario(id, nome, cpf, idade, tipo_sanguineo, fatorRH, especialidade));
 	}
 	return f;
 }
@@ -51,7 +50,7 @@ Funcionario* carregarDadosFuncionario(ifstream &arquivo, int funcionarios) {
 int main() {
 
 
-	Funcionario *f;
+	vector<Funcionario*> *f;
 	int funcionarios = 0;
 
 	ifstream arquivo("lista.txt");
@@ -68,15 +67,18 @@ int main() {
 	arquivo.clear();
 	arquivo.seekg(0, arquivo.beg);
 
-	f = carregarDadosFuncionario(arquivo, funcionarios);
-
 	cout << funcionarios << endl;
 
-	cout << *f;
+	f = carregarDadosFuncionario(arquivo, funcionarios);
 
-	cout << endl;
+	vector<Funcionario*>::iterator it;
+	for (it = f->begin(); it < f->end(); it++) {
+		cout << *it << endl;
+	}
 
-	cout << f->getFatorRH() << endl;
+	
+
+	
 
 
 

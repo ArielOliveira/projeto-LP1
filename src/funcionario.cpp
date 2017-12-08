@@ -1,7 +1,7 @@
 #include "funcionario.h"
 
 namespace petfera {
-	Funcionario::Funcionario(int id, string nome, string cpf, short idade, short tipo_sanguineo, char fatorRH, string especialidade) {
+	Funcionario::Funcionario(int id, string nome, string cpf, short idade, string tipo_sanguineo, char fatorRH, string especialidade) {
 		this->id = id;
 		this->nome = nome;
 		this->cpf = cpf;
@@ -18,7 +18,7 @@ namespace petfera {
 	void Funcionario::setNome(string nome) {this->nome = nome;}
 	void Funcionario::setCPF(string cpf) {this->cpf = cpf;}
 	void Funcionario::setIdade(int idade) {this->idade = idade;}
-	void Funcionario::setTipoSanguineo(short tipo_sanguineo) {this->tipo_sanguineo = tipo_sanguineo;}
+	void Funcionario::setTipoSanguineo(string tipo_sanguineo) {this->tipo_sanguineo = tipo_sanguineo;}
 	void Funcionario::setFatorRH(char fatorRH) {this->fatorRH = fatorRH;}
 	void Funcionario::setEspecialidade(string especialidade) {this->especialidade = especialidade;}
 
@@ -26,17 +26,17 @@ namespace petfera {
 	string Funcionario::getNome() {return nome;}
 	string Funcionario::getCPF() {return cpf;}
 	short Funcionario::getIdade() {return idade;}
-	short Funcionario::getTipoSanguineo() {return tipo_sanguineo;}
+	string Funcionario::getTipoSanguineo() {return tipo_sanguineo;}
 	char Funcionario::getFatorRH() {return fatorRH;}
 	string Funcionario::getEspecialidade() {return especialidade;}
 
 	ostream& operator<< (ostream &o, Funcionario const _funcionario) {
-		o << _funcionario.id << endl
-		  << _funcionario.nome << endl 
-		  << _funcionario.cpf << endl
-		  << _funcionario.idade << endl
-		  << _funcionario.tipo_sanguineo << endl
-		  << _funcionario.fatorRH << endl
+		o << _funcionario.id << ";"
+		  << _funcionario.nome << ";" 
+		  << _funcionario.cpf << ";"
+		  << _funcionario.idade << ";"
+		  << _funcionario.tipo_sanguineo << ";"
+		  << _funcionario.fatorRH << ";"
 		  << _funcionario.especialidade << endl;
 		return o;
 	}

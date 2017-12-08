@@ -18,11 +18,11 @@ namespace petfera {
 			string nome;
 			string cpf;
 			short idade;
-			short tipo_sanguineo;
+			string tipo_sanguineo;
 			char fatorRH;
 			string especialidade;
 		public:
-			Funcionario(int id, string nome, string cpf, short idade, short tipo_sanguineo, char fatorRH, string especialidade);
+			Funcionario(int id, string nome, string cpf, short idade, string tipo_sanguineo, char fatorRH, string especialidade);
 
 			Funcionario();
 			~Funcionario();
@@ -32,7 +32,7 @@ namespace petfera {
 			void setNome(string nome);
 			void setCPF(string cpf);
 			void setIdade(int idade);
-			void setTipoSanguineo(short tipo_sanguineo);
+			void setTipoSanguineo(string tipo_sanguineo);
 			void setFatorRH(char fatorRH);
 			void setEspecialidade(string especialidade);
 
@@ -40,7 +40,7 @@ namespace petfera {
 			string getNome();
 			string getCPF();
 			short getIdade();
-			short getTipoSanguineo();
+			string getTipoSanguineo();
 			char getFatorRH();
 			string getEspecialidade();
 

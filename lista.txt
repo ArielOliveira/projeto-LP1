@@ -1,1 +1,2 @@
-1;Joao;12312312312;23;1;+;chupeta
+1;Joao;123.123.123-12;23;AB;+;veterinario
+2;Maria;132.233.152-23;25;O;+;tratador
