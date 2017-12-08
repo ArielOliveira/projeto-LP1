@@ -15,9 +15,12 @@ ARCHIVE = ar
 
 LIB = -c
 
-OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/anfibio.o ./build/ave.o ./build/mamifero.o ./build/reptil.o ./build/nativo.o ./build/exotico.o ./build/anfibioNativo.o ./build/anfibioExotico.o ./build/aveNativa.o ./build/aveExotica.o ./build/mamiferoNativo.o ./build/mamiferoExotico.o ./build/reptilNativo.o ./build/reptilExotico.o
+OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/animalSilvestre.o ./build/anfibio.o ./build/ave.o ./build/mamifero.o ./build/reptil.o ./build/nativo.o ./build/exotico.o ./build/anfibioNativo.o ./build/anfibioExotico.o ./build/aveNativa.o ./build/aveExotica.o ./build/mamiferoNativo.o ./build/mamiferoExotico.o ./build/reptilNativo.o ./build/reptilExotico.o
+EXEC = ./build/main.o
 
 petferaLib: $(LIB_DIR)/petfera.so $(LIB_DIR)/petfera.a
+
+progs: $(OBJ_DIR)/prog_estatico $(OBJ_DIR)/prog_dinamico
 
 ################### BIBLIOTECA LINUX ######################
 
@@ -38,7 +41,21 @@ $(LIB_DIR)/petfera.so: $(OBJS)
 
 ###########################################################
 
+##################### EXECUTAVEIS #########################
+
+$(OBJ_DIR)/prog_estatico: $(EXEC)
+	$(CC) $^ $(CPPFLAGS) $(LIB_DIR)/petfera.a -o $@
+
+$(OBJ_DIR)/prog_dinamico: $(EXEC)
+	$(CC) $^ $(CPPFLAGS) $(LIB_DIR)/petfera.so -o $@
+
+############################################################	
+
 #OBJETOS
+
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp $(INC_DIR)/petferaLib.h
+	$(CC) -c $(CPPFLAGS) -o $@ $<
+
 $(OBJ_DIR)/funcionario.o: $(SRC_DIR)/funcionario.cpp $(INC_DIR)/funcionario.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
@@ -49,6 +66,9 @@ $(OBJ_DIR)/veterinario.o: $(SRC_DIR)/veterinario.cpp $(INC_DIR)/veterinario.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
 $(OBJ_DIR)/animal.o: $(SRC_DIR)/animal.cpp $(INC_DIR)/animal.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/animalSilvestre.o: $(SRC_DIR)/animalSilvestre.cpp $(INC_DIR)/animalSilvestre.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
 $(OBJ_DIR)/ave.o: $(SRC_DIR)/ave.cpp $(INC_DIR)/ave.h

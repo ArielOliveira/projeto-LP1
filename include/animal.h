@@ -45,6 +45,7 @@ namespace petfera {
 			Veterinario getVeterinario();
 			Tratador getTratador();
 			string getBatismo();
+			
 	};
 }
 
