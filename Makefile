@@ -4,6 +4,7 @@ OBJ_DIR = ./build
 BIN_DIR = ./bin
 DOC_DIR = ./doc
 LIB_DIR = ./lib
+DATA_DIR = ./data
 
 CC = g++
 
@@ -15,39 +16,59 @@ ARCHIVE = ar
 
 LIB = -c
 
-OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/animalSilvestre.o ./build/anfibio.o ./build/ave.o ./build/mamifero.o ./build/reptil.o ./build/nativo.o ./build/exotico.o ./build/anfibioNativo.o ./build/anfibioExotico.o ./build/aveNativa.o ./build/aveExotica.o ./build/mamiferoNativo.o ./build/mamiferoExotico.o ./build/reptilNativo.o ./build/reptilExotico.o
+OBJS = ./build/funcionario.o ./build/tratador.o ./build/veterinario.o ./build/animal.o ./build/animalSilvestre.o ./build/anfibio.o ./build/ave.o ./build/mamifero.o ./build/reptil.o ./build/nativo.o ./build/exotico.o ./build/anfibioNativo.o ./build/anfibioExotico.o ./build/aveNativa.o ./build/aveExotica.o ./build/mamiferoNativo.o ./build/mamiferoExotico.o ./build/reptilNativo.o ./build/reptilExotico.o ./build/registroFuncionario.o ./build/carregarFuncionario.o
 EXEC = ./build/main.o
 
-petferaLib: $(LIB_DIR)/petfera.so $(LIB_DIR)/petfera.a
+.PHONY: petferaLibLinux petferaLibWindows progsLinux progsWindows clean dir
 
-progs: $(OBJ_DIR)/prog_estatico $(OBJ_DIR)/prog_dinamico
+petferaLibLinux: $(LIB_DIR)/petfera.so $(LIB_DIR)/petfera.a
+
+petferaLibWindows: $(LIB_DIR)/petfera.lib $(LIB_DIR)/petfera.dll
+
+progsLinux: $(BIN_DIR)/prog_estatico $(BIN_DIR)/prog_dinamico
+
+progsWindows: $(BIN_DIR)/prog_estatico.exe $(BIN_DIR)/prog_dinamico.exe
 
 ################### BIBLIOTECA LINUX ######################
 
 $(LIB_DIR)/petfera.a: LIB = -c
 $(LIB_DIR)/petfera.a: $(OBJS)
-	$(AR) rcs $@ $(OBJS)
+	$(AR) rcs $@ $^
 
 $(LIB_DIR)/petfera.so: LIB = -fPIC -c
 $(LIB_DIR)/petfera.so: $(OBJS)
-	$(CC) -shared -fPIC -o $@ $(OBJS)
+	$(CC) -shared -fPIC -o $@ $^
 
 ###########################################################
 
 ################## BIBLIOTECA WINDOWS #####################
+$(LIB_DIR)/petfera.lib: LIB = -c
+$(LIB_DIR)/petfera.lib: $(OBJS)
+	$(AR) rcs $@ $^
 
-
-
+$(LIB_DIR)/petfera.dll: LIB = -c
+$(LIB_DIR)/petfera.dll: $(OBJS)
+	$(CC) -shared -o $^
 
 ###########################################################
 
 ##################### EXECUTAVEIS #########################
 
-$(OBJ_DIR)/prog_estatico: $(EXEC)
+## LINUX ##
+$(BIN_DIR)/prog_estatico: $(EXEC)
 	$(CC) $^ $(CPPFLAGS) $(LIB_DIR)/petfera.a -o $@
 
-$(OBJ_DIR)/prog_dinamico: $(EXEC)
+$(BIN_DIR)/prog_dinamico: $(EXEC)
 	$(CC) $^ $(CPPFLAGS) $(LIB_DIR)/petfera.so -o $@
+
+## WINDOWS ##
+$(BIN_DIR)/prog_estatico.exe: $(EXEC)
+	$(CC) $^ $(CPPFLAGS) $(LIB_DIR)/petfera.lib -o $@
+
+$(BIN_DIR)/prog_dinamico.exe: $(EXEC)
+	$(CC) $^ $(CPPFLAGS) $(LIB_DIR)/petfera.dll -o $@
+
+
 
 ############################################################	
 
@@ -113,6 +134,12 @@ $(OBJ_DIR)/reptilNativo.o: $(SRC_DIR)/reptilNativo.cpp $(INC_DIR)/reptilNativo.h
 $(OBJ_DIR)/reptilExotico.o: $(SRC_DIR)/reptilExotico.cpp $(INC_DIR)/reptilExotico.h
 	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
 
+$(OBJ_DIR)/registroFuncionario.o: $(SRC_DIR)/registroFuncionario.cpp $(INC_DIR)/registroFuncionario.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
+$(OBJ_DIR)/carregarFuncionario.o: $(SRC_DIR)/carregarFuncionario.cpp $(INC_DIR)/carregarFuncionario.h
+	$(CC) $(CPPFLAGS) $(LIB) $< -o $@
+
 clean:
 	$(RM) $(BIN_DIR)/*
 	$(RM) $(OBJ_DIR)/*
@@ -125,5 +152,6 @@ dir:
 	mkdir -p src
 	mkdir -p doc
 	mkdir -p lib
+	mkdir -p data
 	mkdir -p test
 

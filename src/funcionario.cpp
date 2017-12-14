@@ -1,14 +1,13 @@
 #include "funcionario.h"
 
 namespace petfera {
-	Funcionario::Funcionario(int id, string nome, string cpf, short idade, string tipo_sanguineo, char fatorRH, string especialidade) {
+	Funcionario::Funcionario(int id, string nome, string cpf, short idade, string tipo_sanguineo, char fatorRH) {
 		this->id = id;
 		this->nome = nome;
 		this->cpf = cpf;
 		this->idade = idade;
 		this->tipo_sanguineo = tipo_sanguineo;
 		this->fatorRH = fatorRH;
-		this->especialidade = especialidade;
 	}
 
 	Funcionario::Funcionario() {}
@@ -20,7 +19,6 @@ namespace petfera {
 	void Funcionario::setIdade(int idade) {this->idade = idade;}
 	void Funcionario::setTipoSanguineo(string tipo_sanguineo) {this->tipo_sanguineo = tipo_sanguineo;}
 	void Funcionario::setFatorRH(char fatorRH) {this->fatorRH = fatorRH;}
-	void Funcionario::setEspecialidade(string especialidade) {this->especialidade = especialidade;}
 
 	int Funcionario::getID() {return id;}
 	string Funcionario::getNome() {return nome;}

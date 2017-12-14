@@ -20,9 +20,9 @@ namespace petfera {
 			short idade;
 			string tipo_sanguineo;
 			char fatorRH;
-			string especialidade;
+			const string especialidade;
 		public:
-			Funcionario(int id, string nome, string cpf, short idade, string tipo_sanguineo, char fatorRH, string especialidade);
+			Funcionario(int id, string nome, string cpf, short idade, string tipo_sanguineo, char fatorRH);
 
 			Funcionario();
 			~Funcionario();
